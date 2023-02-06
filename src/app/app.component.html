@@ -14,21 +14,33 @@
   <app-box class="component-description">
     <h3>TODO</h3>
     <img src="assets/component-interface.png" alt="Component interface">
-    <ol>
+    <h4>Basic</h4>
+    <ul>
       <li>Design the component using CSS and HTML.</li>
       <li>Make it work with the Array&lt;Day&gt; generated in the AppComponent
         (days)
-      </li>
-      <li>Add pagination to the component and the buttons to control it. Look at
-        the shadows that appears in both sides if there are more pagination.
       </li>
       <li>Add an input attribute [multiple]="boolean" to the component. If
         multiple true, the component will allow selecting more than one date, in
         other case, only once.
       </li>
-      <li>Make it compatible with NgModel.
-        &lt;app-selector [(ngModel)]="model"&gt;&lt;/app-selector>
+    </ul>
+    <h4>Medium</h4>
+    <ul>
+      <li>Add pagination to the component and the buttons to control it. Look at
+        the shadows that appears in both sides if there are more pagination.
       </li>
+      <li>Make it compatible with NgModel.
+        &lt;app-selector [(ngModel)]="model"&gt;&lt;/app-selector&gt;
+      </li>
+      <li>
+        Do test cases you consider necessary in order to check the component
+        works properly.
+      </li>
+      <li>Run <b>npm run lint</b> and fix lint issues.</li>
+    </ul>
+    <h4>Advanced</h4>
+    <ul>
       <li>Make it responsive. If the browser is resized or the parent container
         decreases, the component should adapt to its parent. <b>You should avoid 
           reseting pagination.</b><br>
@@ -40,16 +52,11 @@
         the window, in this case, 3 elements can be shown in the window, for this
         reason it shows [7,8,9], if 4 elements fit, it should show [5,6,7,8].
       </li>
-      <li>
-        Do test cases you consider necessary in order to check the component
-        works properly.
-      </li>
-      <li>Run <b>npm run lint</b> and fix lint issues.</li>
-      <li>Generate a git patch with all changes and send it to
-        sergio@tulotero.es.
-      </li>
-    </ol>
+    </ul>
 
+    <p>Finally, generate a git patch with all changes and send it to
+        sergio@tulotero.es.
+    </p>
     <p>
     If you have problems to figure the exercise out, you can send the patch even
     if you aren't able to finish any of the latest points.
