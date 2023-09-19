@@ -2,64 +2,76 @@
 <div class="container">
   <app-box class="header">
     <h1>Test Front-end</h1>
-    <p>In this exercise, you will have to build a component exactly like this
-    one.</p>
+    <p>
+      In this exercise, you will have to build a component exactly like this
+      one.
+    </p>
   </app-box>
   <app-box class="component">
     <form [formGroup]="form" novalidate>
-      <img class="fake-component" src="assets/fake-component.png">
+      <img class="fake-component" src="assets/fake-component.png" />
       <!--<app-selector></app-selector>-->
     </form>
   </app-box>
   <app-box class="component-description">
     <h3>TODO</h3>
-    <img src="assets/component-interface.png" alt="Component interface">
+    <img src="assets/component-interface.png" alt="Component interface" />
     <h4>Basic</h4>
     <ul>
       <li>Design the component using CSS and HTML.</li>
-      <li>Make it work with the Array&lt;Day&gt; generated in the AppComponent
+      <li>
+        Make it work with the Array&lt;Day&gt; generated in the AppComponent
         (days)
       </li>
-      <li>Add an input attribute [multiple]="boolean" to the component. If
+      <li>
+        Add an input attribute [multiple]="boolean" to the component. If
         multiple true, the component will allow selecting more than one date, in
         other case, only once.
       </li>
     </ul>
     <h4>Medium</h4>
     <ul>
-      <li>Add pagination to the component and the buttons to control it. Look at
+      <li>
+        Add pagination to the component and the buttons to control it. Look at
         the shadows that appears in both sides if there are more pagination.
       </li>
-      <li>Make it compatible with NgModel.
-        &lt;app-selector [(ngModel)]="model"&gt;&lt;/app-selector&gt;
-      </li>
+      <li>Make it compatible with the reactive form.</li>
       <li>
         Do test cases you consider necessary in order to check the component
         works properly.
       </li>
-      <li>Run <b>npm run lint</b> and fix lint issues.</li>
+      <li>Run lint and fix lint issues.</li>
     </ul>
     <h4>Advanced</h4>
     <ul>
-      <li>Make it responsive. If the browser is resized or the parent container
-        decreases, the component should adapt to its parent. <b>You should avoid 
-          reseting pagination.</b><br>
-        Example: <br>
-        - Inital window: [1,2,3,4,5]<br>
-        - Click next: [6,7,8,9,10]<br>
-        - Resize decreasing width: [7,8,9]<br>
-        Notice that pagination fits with the number of elements in 
-        the window, in this case, 3 elements can be shown in the window, for this
-        reason it shows [7,8,9], if 4 elements fit, it should show [5,6,7,8].
+      <li>
+        Make it Responsive: Ensure that the component adapts to its parent
+        container when the browser is resized or the parent container size
+        decreases. It's important not to reset pagination and to handle resizing
+        in a way that the page adjusts as if it were initially loaded. For
+        example:
+        <br />
+        <ul>
+          <li>Initial window: [1,2,3,4,5]</li>
+          <li>Click next: [6,7,8,9,10]</li>
+          <li>
+            When resizing to a width where only 3 elements fit, the displayed
+            elements should be [7,8,9]. This is because if you start from the
+            beginning, it would be [1,2,3], [4,5,6], [7,8,9].
+          </li>
+        </ul>
       </li>
     </ul>
 
-    <p>Finally, generate a git patch with all changes and send it to
-        sergio@tulotero.es.
+    <p>
+      Finally, generate a git patch with all changes and send it to
+      sergio@tulotero.es.
     </p>
     <p>
-    If you have problems to figure the exercise out, you can send the patch even
-    if you aren't able to finish any of the latest points.
+      If you encounter any difficulties while working on the exercise, please
+      feel free to send the patch even if you aren't able to complete any of the
+      latest point. We encourage you to submit your progress or any code changes
+      you've made, even if it's not the final solution.
     </p>
 
     Good luck! :-)
