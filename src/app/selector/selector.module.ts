@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {SelectorComponent} from './selector.component';
+import { NgModule } from '@angular/core';
+import { SelectorComponent } from './selector.component';
 
 @NgModule({
   imports: [],
@@ -7,5 +7,4 @@ import {SelectorComponent} from './selector.component';
   declarations: [SelectorComponent],
   providers: [],
 })
-export class SelectorModule {
-}
+export class SelectorModule {}

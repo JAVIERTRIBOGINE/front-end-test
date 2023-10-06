@@ -1,14 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Day} from './selector/day';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Day } from './selector/day';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
   days: Array<Day> = [];
 
   form!: FormGroup;
@@ -21,9 +20,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      selectedDays: [[this.days[0]]]
+      selectedDays: [[this.days[0]]],
     });
   }
-
 }
-

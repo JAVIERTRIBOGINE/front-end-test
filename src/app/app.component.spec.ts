@@ -6,13 +6,8 @@ import { AppComponent } from './app.component';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        ReactiveFormsModule,
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [ReactiveFormsModule, RouterTestingModule],
+      declarations: [AppComponent],
     }).compileComponents();
   });
 

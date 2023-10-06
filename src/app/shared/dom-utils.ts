@@ -1,6 +1,6 @@
 export function calculateElementWidth(
   element: HTMLElement,
-  includeMargin: boolean = false
+  includeMargin: boolean = false,
 ): number {
   let style = window.getComputedStyle(element);
   let width = element.offsetWidth;
@@ -18,7 +18,7 @@ export function calculateElementWidth(
 
 export function calculateElementHeight(
   element: HTMLElement,
-  includeMargin: boolean = false
+  includeMargin: boolean = false,
 ): number {
   let style = window.getComputedStyle(element);
   let height = element.offsetHeight;
