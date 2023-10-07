@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { Day } from './selector/day';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -11,6 +14,8 @@ export class AppComponent implements OnInit {
   days: Array<Day> = [];
 
   form!: FormGroup;
+
+  multiple: boolean = false;
 
   constructor(private formBuilder: FormBuilder) {
     for (let i = 0; i < 100; i++) {
