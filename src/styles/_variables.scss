@@ -1,8 +1,11 @@
 @import "screen";
 @import "palette";
 
-// Containers
+// Container
 $margin-default: 10px !default;
+
+// Component
+$margin-component: 10px 15px !default;
 
 // Fonts
 $font-family-default: "Lato" !default;

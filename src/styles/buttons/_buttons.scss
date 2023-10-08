@@ -12,11 +12,14 @@
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
-  border: $btn-border-default;
+  border: $btn-border-calendar;
+  font-size: 1rem;
+  background-color: $btn-background-calendar;
+  cursor: pointer;
   @include button-size(
+      $btn-calendar-padding-y,
       $btn-padding-y,
-      $btn-padding-x,
-      $btn-font-size-default,
+      $btn-calendar-font-size-default,
       $btn-line-height,
       $btn-border-radius
   );
@@ -36,8 +39,9 @@
   // Disabled comes first so active can properly restyle
   &.disabled,
   &:disabled {
-    opacity: .65;
+    opacity: .35;
     @include box-shadow(none);
+    cursor: not-allowed;
   }
 
   &:active,

@@ -1,1 +1,109 @@
-@import '../../../styles/init-component';
+@import "../../../styles/init-component";
+@import "../../../styles/variables";
+
+:host {
+  .calendar-container {
+    width: 100%;
+    
+    overflow-x: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    position: relative;
+    &.init-shadow::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 30px;
+      background: linear-gradient(
+        to left,
+        rgba(248, 248, 248, 0.85),
+        #ffffffa3
+      );
+      z-index: 1; /* Ensure it's above the content */
+      &__hidden {
+        display: none;
+      }
+    }
+
+    &.end-shadow::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 30px;
+      background: linear-gradient(to right, rgb(248 248 248 / 85%), #ffffffa3);
+      z-index: 1; /* Ensure it's above the content */
+    }
+
+    .calendar {
+      //   @include border-radius();
+      &.small {
+        width: 46px;
+        height: 60px;
+        line-height: 30px;
+        .day {
+          font-size: 25px;
+          font-weight: bold;
+        }
+        .month {
+          font-size: 17px;
+          font-weight: 900;
+        }
+      }
+      &.medium {
+        width: 65px;
+        height: 75px;
+        line-height: 39px;
+        .day {
+          font-size: 28px;
+          font-weight: bold;
+        }
+        .month {
+          font-size: 20px;
+          font-weight: 900;
+        }
+      }
+      &.large {
+        width: 85px;
+        height: 95px;
+        line-height: 45px;
+        .day {
+          font-size: 32px;
+          font-weight: bold;
+        }
+        .month {
+          font-size: 24px;
+          font-weight: 900;
+        }
+      }
+      margin: 3px;
+      text-align: center;
+      border: 2px solid $brand-secondary;
+      color: $brand-secondary;
+      .day {
+        font-size: 25px;
+        font-weight: bold;
+      }
+      .month {
+        font-size: 17px;
+        font-weight: 900;
+      }
+    }
+  }
+
+  .container-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: $margin-default;
+  }
+
+  .selected {
+    .calendar {
+      border: 2px solid $brand-primary;
+      color: $brand-primary;
+      background-color: $background-primary;
+    }
+  }
+}

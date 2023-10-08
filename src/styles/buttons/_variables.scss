@@ -2,12 +2,16 @@
 
 $btn-padding-y: 5px;
 $btn-padding-x: 12px;
+$btn-calendar-padding-y: 2px;
 
 $btn-font-size-default: $font-size-default;
+$btn-calendar-font-size-default: 1rem;
 $btn-font-weight-default: $font-weight-default;
 $btn-line-height: $line-height-base;
 
 $btn-border-default: solid 1px transparent;
+$btn-border-calendar: solid 1px lightgrey;
+$btn-background-calendar: transparent;
 $btn-border-radius: $border-radius-default;
 
 $btn-transition: all .2s ease-in-out !default;
