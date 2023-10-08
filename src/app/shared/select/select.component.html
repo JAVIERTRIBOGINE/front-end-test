@@ -1,1 +1,15 @@
 <ng-content></ng-content>
+<div #calendarContainer class="calendar-container init-shadow end-shadow">
+    <app-select-item *ngFor="let day of days; index as i" [value]="day" [scrollPosition]="scrollPosition">
+      <div #calendar class="calendar {{sizeClass}}">
+        <div class="day">{{ day.time | date: "d" }}</div>
+        <div class="month">{{ day.time | date: "MMM" }}</div>
+      </div>
+    </app-select-item>
+  </div>
+  <div class="container-buttons">
+    <button class="btn previous" (click)="scrollLeft()">
+      Previous
+    </button>
+    <button class="btn next" (click)="scrollRight()">Next</button>
+  </div>

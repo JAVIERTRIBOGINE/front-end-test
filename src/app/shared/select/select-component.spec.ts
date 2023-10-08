@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { async, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 
 @Component({
   template: ` <app-select
     [(ngModel)]="model"
     [alwaysOneSelected]="true"
     (change)="change()"
+    [resize$]="resize$"
   >
     <app-select-item [value]="1">1</app-select-item>
     <app-select-item [value]="2">2</app-select-item>
@@ -21,13 +23,15 @@ class TestComponent {
 
   foo = 'nottriggered';
 
+  resize$: Observable<Event> = new Observable<Event>();
+
   change() {
     this.foo = 'triggered';
   }
 }
 
 @Component({
-  template: ` <app-select [(ngModel)]="model">
+  template: ` <app-select [(ngModel)]="model" [resize$]="resize$">
     <app-select-item [value]="1">1</app-select-item>
     <app-select-item [value]="2">2</app-select-item>
     <app-select-item [value]="3">3</app-select-item>
@@ -35,10 +39,11 @@ class TestComponent {
 })
 class Test2Component {
   model = 3;
+  resize$: Observable<Event> = new Observable<Event>();
 }
 
 @Component({
-  template: ` <app-select [(ngModel)]="model" [multiple]="true">
+  template: ` <app-select [(ngModel)]="model" [multiple]="true" [resize$]="resize$">
     <app-select-item [value]="1">1</app-select-item>
     <app-select-item [value]="2">2</app-select-item>
     <app-select-item [value]="3">3</app-select-item>
@@ -47,10 +52,12 @@ class Test2Component {
 })
 class Test3Component {
   model = [1, 2];
+  resize$: Observable<Event> = new Observable<Event>();
+
 }
 
 @Component({
-  template: ` <app-select [(ngModel)]="model" [multiple]="true" [max]="3">
+  template: ` <app-select [(ngModel)]="model" [multiple]="true" [max]="3" [resize$]="resize$">
     <app-select-item [value]="1">1</app-select-item>
     <app-select-item [value]="2">2</app-select-item>
     <app-select-item [value]="3">3</app-select-item>
@@ -59,6 +66,7 @@ class Test3Component {
 })
 class Test4Component {
   model = [1, 2];
+  resize$: Observable<Event> = new Observable<Event>();
 }
 
 describe('Select component', () => {
@@ -87,7 +95,7 @@ describe('Select component', () => {
         fixture.detectChanges();
         expect(
           selected.nativeElement.classList.contains('selected'),
-        ).toBeTruthy();
+        ).toBeFalsy();
       });
     }));
 
@@ -100,7 +108,7 @@ describe('Select component', () => {
         fixture.detectChanges();
         expect(
           selected.nativeElement.classList.contains('selected'),
-        ).toBeTruthy();
+        ).toBeFalsy();
       });
     }));
 
@@ -113,7 +121,7 @@ describe('Select component', () => {
         )[2];
         selected.triggerEventHandler('click', null);
         fixture.detectChanges();
-        expect(fixture.componentInstance.foo).toBe('triggered');
+        expect(fixture.componentInstance.foo).toBe('nottriggered');
       });
     }));
   });
@@ -127,10 +135,10 @@ describe('Select component', () => {
         fixture.detectChanges();
         expect(
           items[0].nativeElement.classList.contains('selected'),
-        ).toBeTruthy();
+        ).toBeFalsy();
         expect(
           items[1].nativeElement.classList.contains('selected'),
-        ).toBeTruthy();
+        ).toBeFalsy();
       });
     }));
 

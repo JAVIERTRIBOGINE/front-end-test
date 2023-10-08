@@ -2,17 +2,24 @@ import {
   Component,
   Input,
   QueryList,
-  ContentChildren,
   AfterContentInit,
   Output,
   EventEmitter,
   OnInit,
-  forwardRef,
+  ViewChildren,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  SimpleChanges,
+  OnChanges,
+  AfterViewChecked,
 } from '@angular/core';
 import { AbstractNgModel } from '../model/abstract-ngmodel';
 import { SelectItemComponent } from './select-item.component';
 import { ngModelProvider } from '../model/ng-model-config';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { Day } from 'src/app/selector/day';
+import { calculateElementWidth } from '../dom-utils';
 
 @Component({
   selector: 'app-select',
@@ -22,10 +29,16 @@ import { Subject } from 'rxjs';
 })
 export class SelectComponent
   extends AbstractNgModel<any>
-  implements OnInit, AfterContentInit
+  implements OnInit, AfterContentInit, AfterViewChecked
 {
   @Input()
   multiple = false;
+
+  @Input() days!: Day[];
+
+  @Input() resize$!: Observable<Event>;
+
+  public beggining: boolean = false;
 
   /**
    * Only for multiple = true
@@ -38,23 +51,48 @@ export class SelectComponent
    * it, no value will be initialized at first
    */
   @Input()
-  alwaysOneSelected = false;
+  alwaysOneSelected = true;
 
   @Output()
-  change = new EventEmitter<any>();
+  changeDay = new EventEmitter<any>();
 
-  @ContentChildren(forwardRef(() => SelectItemComponent))
+  @ViewChildren(SelectItemComponent)
   children!: QueryList<SelectItemComponent>;
 
+  scrollPosition!: number;
   private modelChecker = new Subject<any>();
 
+  @ViewChild('calendarContainer', { read: ElementRef })
+  public calendarContainer!: ElementRef<any>;
+  
+  @ViewChildren("calendar") calendar!: QueryList<ElementRef>;
+
+  get beg() {
+    return (
+      this.calendarContainer?.nativeElement?.scrollLeft <= this.scrollPosition
+    );
+  }
+
+  get sizeClass() {
+    return this.scrollPosition < 900 ? "large" : this.scrollPosition < 1108?  "medium": "small";
+  }
+
   ngOnInit(): void {
+    this.resize$.subscribe((_event: any) => {
+      this.scrollPosition = calculateElementWidth(this.calendarContainer?.nativeElement);
+    });
     if (this.multiple) {
       this.model = [];
     }
   }
 
   ngAfterContentInit(): void {
+    // this.scrollPosition = this.calendarContainer? calculateElementWidth(this.calendarContainer.nativeElement): 1108;
+    this.modelChecker.subscribe(() => this.doCheck());
+  }
+
+  ngAfterViewChecked(): void {
+    this.scrollPosition = this.calendarContainer? calculateElementWidth(this.calendarContainer.nativeElement): 1108;
     this.modelChecker.subscribe(() => this.doCheck());
   }
 
@@ -117,9 +155,31 @@ export class SelectComponent
     }
   }
 
-  private notify() {
-    this.modelChange(this.model);
-    this.change.emit(this.model);
+  public scrollRight(): void {
+    this.calendarContainer.nativeElement.scrollTo({
+      left:
+        this.calendarContainer.nativeElement.scrollLeft + this.scrollPosition,
+      behavior: 'smooth',
+    });
+    console.log('position: ', this.scrollPosition);
+    console.log('beggining?: ', this.beg);
+  }
+
+  public scrollLeft(): void {
+    const leftPosition: number =
+      this.calendarContainer.nativeElement.scrollLeft;
+
+    this.calendarContainer.nativeElement.scrollTo({
+      left: leftPosition - this.scrollPosition,
+      behavior: 'smooth',
+    });
+    console.log(
+      'scrollLeft: ',
+      this.calendarContainer.nativeElement.scrollLeft,
+    );
+  }
+  private notify(): void {
+    this.changeDay.emit(this.model);
   }
 
   private unselectOthers(child: SelectItemComponent) {
