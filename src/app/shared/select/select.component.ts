@@ -13,6 +13,7 @@ import {
   SimpleChanges,
   OnChanges,
   AfterViewChecked,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { AbstractNgModel } from '../model/abstract-ngmodel';
 import { SelectItemComponent } from './select-item.component';
@@ -26,6 +27,7 @@ import { calculateElementWidth } from '../dom-utils';
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   providers: [ngModelProvider(SelectComponent)],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent
   extends AbstractNgModel<any>
@@ -87,7 +89,6 @@ export class SelectComponent
   }
 
   ngAfterContentInit(): void {
-    // this.scrollPosition = this.calendarContainer? calculateElementWidth(this.calendarContainer.nativeElement): 1108;
     this.modelChecker.subscribe(() => this.doCheck());
   }
 
