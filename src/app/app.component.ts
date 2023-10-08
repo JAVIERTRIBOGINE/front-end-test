@@ -4,6 +4,8 @@ import {
 } from '@angular/core';
 import { Day } from './selector/day';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { ResizeService } from './resize.service';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +17,10 @@ export class AppComponent implements OnInit {
 
   form!: FormGroup;
 
-  multiple: boolean = false;
+  multiple: boolean = true;
+  resize$: Observable<Event> = this.resizeService.resize$;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private resizeService: ResizeService) {
     for (let i = 0; i < 100; i++) {
       this.days.push(new Day(i, new Date(i * 100000000)));
     }
