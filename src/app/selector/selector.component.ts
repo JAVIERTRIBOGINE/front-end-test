@@ -11,7 +11,7 @@ import { Day } from './day';
   providers: [ngModelProvider(SelectorComponent)],
 })
 export class SelectorComponent implements AbstractNgModel<any> {
-  @Input() resize$!: Observable<Event>
+  @Input() resize$!: Observable<Event>;
 
   public model: any;
   modelChange: any;

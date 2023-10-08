@@ -6,12 +6,6 @@ import {
   Host,
   forwardRef,
   Inject,
-  OnChanges,
-  SimpleChanges,
-  ViewChild,
-  ElementRef,
-  AfterContentInit,
-  ViewChildren,
 } from '@angular/core';
 import { SelectComponent } from './select.component';
 
@@ -20,35 +14,21 @@ import { SelectComponent } from './select.component';
   templateUrl: './select-item.component.html',
   styleUrls: ['./select-item.component.scss'],
 })
-export class SelectItemComponent implements /*OnChanges,*/ AfterContentInit {
-  
+export class SelectItemComponent {
   @Input()
   value: any;
 
   @Input()
-  scrollPosition!: number
+  scrollPosition!: number;
 
   @HostBinding('class.selected')
   selected = false;
-
-  
 
   constructor(
     @Host()
     @Inject(forwardRef(() => SelectComponent))
     private parent?: SelectComponent,
   ) {}
-
-  ngAfterContentInit(): void {
-    // this.calendar.nativeElement.width = this.scrollPosition < 900 ? "60px": "46px";
-  }
-
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log("scrollPosition", this.scrollPosition);
-  //   console.log("Simple changes: ", changes)
-  //   // this.calendar.nativeElement.width = this.scrollPosition < 900 ? "60px": "46px";
-
-  // }
 
   @HostListener('click')
   click() {

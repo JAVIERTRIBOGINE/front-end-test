@@ -43,7 +43,11 @@ class Test2Component {
 }
 
 @Component({
-  template: ` <app-select [(ngModel)]="model" [multiple]="true" [resize$]="resize$">
+  template: ` <app-select
+    [(ngModel)]="model"
+    [multiple]="true"
+    [resize$]="resize$"
+  >
     <app-select-item [value]="1">1</app-select-item>
     <app-select-item [value]="2">2</app-select-item>
     <app-select-item [value]="3">3</app-select-item>
@@ -53,11 +57,15 @@ class Test2Component {
 class Test3Component {
   model = [1, 2];
   resize$: Observable<Event> = new Observable<Event>();
-
 }
 
 @Component({
-  template: ` <app-select [(ngModel)]="model" [multiple]="true" [max]="3" [resize$]="resize$">
+  template: ` <app-select
+    [(ngModel)]="model"
+    [multiple]="true"
+    [max]="3"
+    [resize$]="resize$"
+  >
     <app-select-item [value]="1">1</app-select-item>
     <app-select-item [value]="2">2</app-select-item>
     <app-select-item [value]="3">3</app-select-item>

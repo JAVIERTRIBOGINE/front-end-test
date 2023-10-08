@@ -9,9 +9,6 @@ import {
   ViewChildren,
   ElementRef,
   ViewChild,
-  AfterViewInit,
-  SimpleChanges,
-  OnChanges,
   AfterViewChecked,
   ChangeDetectionStrategy,
 } from '@angular/core';
@@ -27,7 +24,7 @@ import { calculateElementWidth } from '../dom-utils';
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   providers: [ngModelProvider(SelectComponent)],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent
   extends AbstractNgModel<any>
@@ -40,18 +37,9 @@ export class SelectComponent
 
   @Input() resize$!: Observable<Event>;
 
-  public beggining: boolean = false;
-
-  /**
-   * Only for multiple = true
-   */
   @Input()
   max!: number;
 
-  /**
-   * Keeps always one selected if you init at first one value. If you don't do
-   * it, no value will be initialized at first
-   */
   @Input()
   alwaysOneSelected = true;
 
@@ -66,8 +54,8 @@ export class SelectComponent
 
   @ViewChild('calendarContainer', { read: ElementRef })
   public calendarContainer!: ElementRef<any>;
-  
-  @ViewChildren("calendar") calendar!: QueryList<ElementRef>;
+
+  @ViewChildren('calendar') calendar!: QueryList<ElementRef>;
 
   get beg() {
     return (
@@ -76,12 +64,18 @@ export class SelectComponent
   }
 
   get sizeClass() {
-    return this.scrollPosition < 900 ? "large" : this.scrollPosition < 1108?  "medium": "small";
+    return this.scrollPosition < 900
+      ? 'large'
+      : this.scrollPosition < 1108
+      ? 'medium'
+      : 'small';
   }
 
   ngOnInit(): void {
     this.resize$.subscribe((_event: any) => {
-      this.scrollPosition = calculateElementWidth(this.calendarContainer?.nativeElement);
+      this.scrollPosition = calculateElementWidth(
+        this.calendarContainer?.nativeElement,
+      );
     });
     if (this.multiple) {
       this.model = [];
@@ -93,7 +87,9 @@ export class SelectComponent
   }
 
   ngAfterViewChecked(): void {
-    this.scrollPosition = this.calendarContainer? calculateElementWidth(this.calendarContainer.nativeElement): 1108;
+    this.scrollPosition = this.calendarContainer
+      ? calculateElementWidth(this.calendarContainer.nativeElement)
+      : 1108;
     this.modelChecker.subscribe(() => this.doCheck());
   }
 
@@ -162,8 +158,6 @@ export class SelectComponent
         this.calendarContainer.nativeElement.scrollLeft + this.scrollPosition,
       behavior: 'smooth',
     });
-    console.log('position: ', this.scrollPosition);
-    console.log('beggining?: ', this.beg);
   }
 
   public scrollLeft(): void {
@@ -174,10 +168,6 @@ export class SelectComponent
       left: leftPosition - this.scrollPosition,
       behavior: 'smooth',
     });
-    console.log(
-      'scrollLeft: ',
-      this.calendarContainer.nativeElement.scrollLeft,
-    );
   }
   private notify(): void {
     this.changeDay.emit(this.model);
